@@ -30,6 +30,60 @@ int main(void) {
 	Config_FLASH();
 	Config_CLKOUT();
 
+	//SystemInit();	// A funcao SystemInit foi apresentada na pagina 177 do CAP 5.
+	//Passo 1 :
+	//#define CLOCK_SETUP           1
+	//#define SCS_Val               0x00000020	// se CLOCKS_SETUP, configure SCS com VAL
+
+	//Passo4 : Fonte de Clock para o PLL0:
+	//#define CLKSRCSEL_Val         0x00000001	// clock do oscilador principal
+
+	//Passo5 :
+	//#define PLL0_SETUP            1
+	//#define PLL0CFG_Val           0x00050063	// se PLL0_SETUP, configure com 05 00 63
+	// Seria PRE-Divisor = 0x05 (5 decimal), e Multiplicador = 0x63 (100 decimal)
+	/*
+	 * Fcco = (2 * multiplicador+1 * clock) / divisor+1
+	 * 0x63 = 99 com +1 = 100 (multiplicador)
+	 * 0x05 = 5 com +1 = 6 (pre-divisor)
+	 *
+	 * Fcco = (2 * 100 * 12 mhz) / 6
+	 * Fcco = (2 * 100 * 12.000.000) / 6
+	 * Fcco = (2 * 1.200.000.000) / 6
+	 * Fcco = 2.400.000.000 / 6
+	 * Fcco = 400.000.000 = 400 mhz
+	 *
+	 */
+
+	//Passo6 :
+	//#define PLL1_SETUP            1
+	//#define PLL1CFG_Val           0x00000023	// se PLL1_SETUP, configura com 00 00 23
+	// Valor multiplicador PLL1=0x23 [bits 6:5=01 = 1 divisor // 4:0 = 00011 = 3 multiplic]
+
+	//Passo2 :
+	//#define CCLKCFG_Val           0x00000003	// configura CCLKCFG  = DIVISOR DE CLOCK /4
+
+	//Passo7 :
+	//#define USBCLKCFG_Val         0x00000000	// usado caso o PLL1_SETUP nao for configurado
+
+	//Passo3 :	Selecao do Periferico de Clock
+	//#define PCLKSEL0_Val          0x00000000	//
+	//#define PCLKSEL1_Val          0x00000000
+
+	//Passo8:
+	//#define PCONP_Val             0x042887DE	// Power Control para Perifericos
+	//04 = 4  =  0000.0100 [31:24] = 1 = PCI2C2 / I2C 2
+	//28 = 40 =  0010.1000 [23:16] = 1 = PCSSP0 / SSP0
+	//87 = 135 = 1000.0111 [15:8]  = [15 reservado], [10:8] = 111 = SSP1 / RTC / SPI
+	//DE = 222 = 1101.1110 [7:0]   = I2C 0 / PWM 1 / UART 1 / UART 0 / Timer 1 / Timer 0
+
+	//Passo 9:
+	//#define CLKOUTCFG_Val         0x00000000	// Configura Clock de Saida no pino fisico
+
+
+
+
+
     // Force the counter to be placed into memory
     volatile static int i = 0 ;
     // Enter an infinite loop, just incrementing a counter
