@@ -46,11 +46,23 @@ int main(void) {
         LPC_GPIO0->FIOPIN &=	~(1<<22);	// desliga o pino 0.22
         delay_ms(1000);					// 1/2 seg pausa
 
+
         LPC_GPIO0->FIOSET |=	1<<22;		// liga (SET) o pino 0.22
         delay_ms(2000);					// 1 seg pausa
 
         LPC_GPIO0->FIOCLR |=	1<<22;		// desliga (CLR) o pino 0.22
         delay_ms(2000);					// 1 seg pausa
+
+
+        //delay_ms(1000);
+        for(i=0;i<20;i++)
+        {
+            LPC_GPIO0->FIOSET |=	1<<22;		// liga (SET) o pino 0.22
+            delay_ms(50);					// 1 seg pausa
+            LPC_GPIO0->FIOCLR |=	1<<22;		// desliga (CLR) o pino 0.22
+            delay_ms(50);					// 1 seg pausa
+        }
+        delay_ms(1000);
 
     }
     return 0 ;

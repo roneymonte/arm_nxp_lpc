@@ -284,11 +284,11 @@
 #define SCS_Val               0x00000020	//(bit5) oscilador habilitado = main oscillator enabled
 											//(bit4) = faixa do osc principal (1 a 20mhz [0], ou 20 a 25mhz[1])
 											//(bit6) = oscilador esta estabilizado
-//#define CLKSRCSEL_Val         0x00000001	//00:clock do oscilador IRC (4mhz)/01:principal(1 a 25mhz)/10:RTC(32.768mhz)
-#define CLKSRCSEL_Val         0x00000000	//definido o RC interno de 4mhz
+#define CLKSRCSEL_Val         0x00000001	//00:clock do oscilador IRC (4mhz)/01:principal(1 a 25mhz)/10:RTC(32.768mhz)
+//#define CLKSRCSEL_Val         0x00000000	//definido o RC interno de 4mhz
 #define PLL0_SETUP            1
-//#define PLL0CFG_Val           0x00050063	//PRE-Divisor = 0x05 (5 decimal), 00, e Multiplicador = 0x63 (100 decimal)
-#define PLL0CFG_Val			  0x00050017	// 4mhz*(5+1)div(19+1)=4*6div24=24/24(-1)=1 (0x17=23) ===> geral 1mhz
+#define PLL0CFG_Val           0x00050063	//PRE-Divisor = 0x05 (5 decimal), 00, e Multiplicador = 0x63 (100 decimal)
+//#define PLL0CFG_Val			  0x002F0005	// (2*)4mhz*(5+1)div(47+1)=8*6div24=48/48(-1)=1 (0x2F=47) ===> geral 1mhz
 #define PLL1_SETUP            1
 #define PLL1CFG_Val           0x00000023	//Valor multiplicador PLL1=0x23 [bits 6:5=01 = 1 divisor
 											// 4:0 = 00011 = 3 multiplic]

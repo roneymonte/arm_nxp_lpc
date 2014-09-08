@@ -23,25 +23,25 @@ endif
 # Add inputs and outputs from these tool invocations to the build variables 
 
 # All Target
-all: libLIB_LPC1700_USUARIO_v2Roney.a
+all: libLIB_LPC1700_USUARIO.a
 
 # Tool invocations
-libLIB_LPC1700_USUARIO_v2Roney.a: $(OBJS) $(USER_OBJS)
+libLIB_LPC1700_USUARIO.a: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: MCU Archiver'
-	arm-none-eabi-ar -r  "libLIB_LPC1700_USUARIO_v2Roney.a" $(OBJS) $(USER_OBJS) $(LIBS)
+	arm-none-eabi-ar -r  "libLIB_LPC1700_USUARIO.a" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 	$(MAKE) --no-print-directory post-build
 
 # Other Targets
 clean:
-	-$(RM) $(OBJS)$(C_DEPS)$(ARCHIVES) libLIB_LPC1700_USUARIO_v2Roney.a
+	-$(RM) $(OBJS)$(C_DEPS)$(ARCHIVES) libLIB_LPC1700_USUARIO.a
 	-@echo ' '
 
 post-build:
 	-@echo 'Performing post-build steps'
-	-arm-none-eabi-size libLIB_LPC1700_USUARIO_v2Roney.a ; # arm-none-eabi-objdump -h -S libLIB_LPC1700_USUARIO_v2Roney.a >libLIB_LPC1700_USUARIO_v2Roney.lss
+	-arm-none-eabi-size libLIB_LPC1700_USUARIO.a ; # arm-none-eabi-objdump -h -S libLIB_LPC1700_USUARIO.a >libLIB_LPC1700_USUARIO.lss
 	-@echo ' '
 
 .PHONY: all clean dependents
