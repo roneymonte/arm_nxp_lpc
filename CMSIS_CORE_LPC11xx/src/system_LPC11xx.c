@@ -119,22 +119,37 @@
 //                     <i> 0 = is disabled
 // </e>
 */
-#define CLOCK_SETUP           1
-#define SYSCLK_SETUP          1
-#define SYSOSC_SETUP          1
+#define CLOCK_SETUP           1				/* Clock Setup              */
+#define SYSCLK_SETUP          1				/* System Clock Setup       */
+#define SYSOSC_SETUP          1				/* System Oscillator Setup  */
+
 #define SYSOSCCTRL_Val        0x00000000	// [0] Bypass system oscillator;
 											// [1] Determines frequency range for Low-power oscillator
-#define WDTOSC_SETUP          0
-#define WDTOSCCTRL_Val        0x000000A0
-#define SYSPLLCLKSEL_Val      0x00000001
+#define WDTOSC_SETUP          0				/* Watchdog Oscillator Setup*/
+#define WDTOSCCTRL_Val        0x000000A0	/* Watchdog Oscillator Setup*/
+#define SYSPLLCLKSEL_Val      0x00000001	/* Select PLL Input&0x3:
+												0=Internal RC Osc, usa __IRC_OSC_CLK que eh 12mhz;
+												1=System Osc, usa SystemCoreClock = __SYS_OSC_CLK que eh 12mhz
+													ou SystemCoreClock =  12mhz multiplicado (SYSPLLCTRL&0x01F)+1;
+												2=WDT Osc;
+												3=Reserved;	*/
 #define SYSPLL_SETUP          1
-#define SYSPLLCTRL_Val        0x00000023
-#define MAINCLKSEL_Val        0x00000003
-#define SYSAHBCLKDIV_Val      0x00000001
+#define SYSPLLCTRL_Val        0x00000023	// sempre que fizer AND 0x180, usara uma multiplicacao...
+											/* uint32 !< Offset: 0x040 System PLL clock source select (R/W) */
+											/* &0x180 -> usa SystemCoreClock o proprio __IRC_OSC_CLK de 12mhz
+											 * ou SystemCoreClock = SYSPLLCTRL multiplicado por (SYSPLLCTRL&0x01F)+1
+											 */
+
+											/*!< Offset: 0x070 Main clock source select (R/W) */
+#define MAINCLKSEL_Val        0x00000003	/* &(0x03) =0 -> Internal RC oscillator
+											   se =1 -> Input Clock to System PLL;	se =2 -> WDT Osc
+											   se =3 -> System PLL Clock Out */
+
+#define SYSAHBCLKDIV_Val      0x00000001	/*!< Offset: 0x078 System AHB clock divider (R/W) */
 #define AHBCLKCTRL_Val        0x0001005F
-#define SSP0CLKDIV_Val        0x00000001
-#define UARTCLKDIV_Val        0x00000001
-#define SSP1CLKDIV_Val        0x00000001
+#define SSP0CLKDIV_Val        0x00000001	/*!< Offset: 0x094 SSP0 clock divider (R/W) */
+#define UARTCLKDIV_Val        0x00000001	/*!< Offset: 0x098 UART clock divider (R/W) */
+#define SSP1CLKDIV_Val        0x00000001	/*!< Offset: 0x09C SSP1 clock divider (R/W) */
 
 /*--------------------- Memory Mapping Configuration -------------------------
 //
@@ -415,17 +430,21 @@ void SystemInit (void)
   LPC_SYSCON->PDRUNCFG     &= ~(1 << 5);          /* Power-up System Osc      */
   LPC_SYSCON->SYSOSCCTRL    = SYSOSCCTRL_Val;
   for (i = 0; i < 200; i++) __NOP();
+
   LPC_SYSCON->SYSPLLCLKSEL  = SYSPLLCLKSEL_Val;   /* Select PLL Input         */
   LPC_SYSCON->SYSPLLCLKUEN  = 0x01;               /* Update Clock Source      */
   LPC_SYSCON->SYSPLLCLKUEN  = 0x00;               /* Toggle Update Register   */
   LPC_SYSCON->SYSPLLCLKUEN  = 0x01;
   while (!(LPC_SYSCON->SYSPLLCLKUEN & 0x01));     /* Wait Until Updated       */
+
 #if (SYSPLL_SETUP)                                /* System PLL Setup         */
   LPC_SYSCON->SYSPLLCTRL    = SYSPLLCTRL_Val;
   LPC_SYSCON->PDRUNCFG     &= ~(1 << 7);          /* Power-up SYSPLL          */
   while (!(LPC_SYSCON->SYSPLLSTAT & 0x01));	      /* Wait Until PLL Locked    */
+
 #endif
 #endif
+
 #if (WDTOSC_SETUP)                                /* Watchdog Oscillator Setup*/
   LPC_SYSCON->WDTOSCCTRL    = WDTOSCCTRL_Val;
   LPC_SYSCON->PDRUNCFG     &= ~(1 << 6);          /* Power-up WDT Clock       */
