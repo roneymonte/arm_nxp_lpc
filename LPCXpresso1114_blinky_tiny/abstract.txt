@@ -1,0 +1,27 @@
+***********************************************************************
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!READ ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+PROJECT:
+LPCXpresso1114_blinky_tiny
+
+DESCRIPTION:
+This example project makes use of a 16bit timer to blink an LED at 1Hz.
+The project targets an LPC1114 Cortex-M0 part and makes use of multiple
+code-size reduction techniques. Note that the small_gpio's look up table
+is actually located via manual linker configuration in the wake up section
+of the execption vector. Because this project does not use low power modes
+this can save 60 bytes, which is larger than the look up table. In the 
+remaining 0xC bytes between the reset vectors and the true ISR vecttors, 
+the body code of IntDefaultHandler() at 0x4 bytes has also been included.
+
+When downloaded to the board and executed, LED2 will be illuminated.
+The state of LED2 will toggle every 0.5 second, timed using the 
+LPC1114's timer16 peripheral
+
+Total program image size: 516 bytes (vs 1,448 bytes)
+
+The project makes use of code from the following library projects:
+- CMSISv1p30_LPC11xx:	for CMSIS 1.30 files relevant to LPC11xx
+- small_gpio.c/h: 		local project routines for I/O. Size optimized.
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!READ ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***********************************************************************
