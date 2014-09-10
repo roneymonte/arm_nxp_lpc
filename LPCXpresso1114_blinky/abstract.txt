@@ -1,0 +1,22 @@
+***********************************************************************
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!READ ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+PROJECT:
+LPCXpresso1114_blinky
+
+DESCRIPTION:
+This example project makes use of a 16bit timer to blink an LED at 1Hz.
+The project targets an LPC1114 Cortex-M0 part and uses "out of the box"
+project settings (i.e. it is not code-size reduced).
+
+When downloaded to the board and executed, LED2 will be illuminated.
+The state of LED2 will toggle every 0.5 second, timed using the 
+LPC1114's timer16 peripheral
+
+Total program image size: 1,452 bytes
+
+The project makes use of code from the following library projects:
+- CMSISv1p30_LPC11xx : for CMSIS 1.30 files relevant to LPC11xx
+- LPC11xx_Lib        : local copies LPC11xx peripheral driver files
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!READ ME!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+***********************************************************************
