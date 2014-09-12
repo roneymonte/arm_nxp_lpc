@@ -8,11 +8,11 @@
 ===============================================================================
 */
 
-#ifdef __USE_CMSIS
+//#ifdef __USE_CMSIS
 #include "LPC11xx.h"
-#endif
+//#endif
 
-#include <cr_section_macros.h>
+//#include <cr_section_macros.h>
 
 // TODO: insert other include files here
 
@@ -23,11 +23,11 @@ int main(void) {
     // TODO: insert code here
 	SystemInit();
 
-	SystemCoreClockUpdate();
-
 	/* Enable AHB clock to the GPIO domain. */
-	 LPC_SYSCON->SYSAHBCLKCTRL |= (1<<6);
+	LPC_SYSCON->SYSAHBCLKCTRL |= (1<<6);
 
+
+	//SystemCoreClockUpdate();
 
 	unsigned int contador;
 
@@ -36,8 +36,13 @@ int main(void) {
 	//LPC_GPIO0->
 	//LPC_GPIO0->DIR  = 0x0FFF;	// todos pinos como output
 	LPC_GPIO0->DIR	|= (1<<8);	// habilita a porta 0_8 (pino 1 do LPC1114) como saida (1)
+	//LPC_GPIO0->DIR |=  (1<<7);
+	//LPC_GPIO1->DIR |=  (1<<8);
+
 	//LPC_GPIO0->DATA = 0x0000;	// pinos em low
 	LPC_GPIO0->DATA &= ~(1<<8);	// coloca a porta 0_8 como low
+	//LPC_GPIO0->DATA &= ~(1<<7);
+	//LPC_GPIO1->DATA &= ~(1<<8);
 
 	//LPC_GPIO0->MASKED_ACCESS[(1<<8)]=(1<<8);	// seta o PI0.8 como high
 	//LPC_GPIO0->DATA = 0x0FFF;	// pinos em high
@@ -46,18 +51,24 @@ int main(void) {
 
 	//LPC_IOCON->PIO0_8 = 0;	// configura o pino 0_8 como saida
 
+	//LPC_GPIO0->DATA |= (1<<7);
+	//LPC_GPIO1->DATA |= (1<<8);
 
 
     // Force the counter to be placed into memory
-    volatile static int i = 0 ;
+    //volatile static int i = 0 ;
     // Enter an infinite loop, just incrementing a counter
     while(1) {
-        i++ ;
+        //i++ ;
 
         LPC_GPIO0->DATA |= (1<<8);	// liga o led no pino 0_8
+        //LPC_GPIO0->DATA &= ~(1<<7);
+        //LPC_GPIO1->DATA &= ~(1<<8);
         for(contador=0; contador<2000000;contador++);
 
         LPC_GPIO0->DATA &= ~(1<<8);	// desliga o led no pino 0_8
+        //LPC_GPIO0->DATA |= (1<<7);
+        //LPC_GPIO1->DATA |= (1<<8);
         for(contador=0; contador<2000000;contador++);
 
     }
