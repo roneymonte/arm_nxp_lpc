@@ -22,10 +22,11 @@ int main(void) {
 
     // TODO: insert code here
 	SystemInit();
+
 	SystemCoreClockUpdate();
 
 	/* Enable AHB clock to the GPIO domain. */
-	  //LPC_SYSCON->SYSAHBCLKCTRL |= (1<<6);
+	 LPC_SYSCON->SYSAHBCLKCTRL |= (1<<6);
 
 
 	unsigned int contador;
@@ -55,6 +56,7 @@ int main(void) {
 
         LPC_GPIO0->DATA |= (1<<8);	// liga o led no pino 0_8
         for(contador=0; contador<2000000;contador++);
+
         LPC_GPIO0->DATA &= ~(1<<8);	// desliga o led no pino 0_8
         for(contador=0; contador<2000000;contador++);
 
