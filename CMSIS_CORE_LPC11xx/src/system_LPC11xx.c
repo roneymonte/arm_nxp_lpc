@@ -125,8 +125,57 @@
 
 #define SYSOSCCTRL_Val        0x00000000	// [0] Bypass system oscillator;
 											// [1] Determines frequency range for Low-power oscillator
+
+						/*
+						 * Table 12. System oscillator control register (SYSOSCCTRL, address 0x4004 8020) bit
+							description
+							Bit	Symbol	Value	Description 											Reset value
+							0 	BYPASS 			Bypass system oscillator	 							0x0
+										0 		Oscillator is not bypassed.
+										1 		Bypass enabled. PLL input (sys_osc_clk) is fed
+													directly from the XTALIN pin bypassing the
+													oscillator. Use this mode when using an external
+													clock source instead of the crystal oscillator.
+							1	FREQRANGE 		Determines frequency range for Low-power oscillator.	0x0
+										0		1 - 20 MHz frequency range.
+										1		15 - 25 MHz frequency range
+						 */
+
 #define WDTOSC_SETUP          0				/* Watchdog Oscillator Setup*/
-#define WDTOSCCTRL_Val        0x000000A0	/* Watchdog Oscillator Setup*/
+
+#define WDTOSCCTRL_Val        0x00000000	// default era A0
+		/* Watchdog Oscillator Setup*/
+							/*
+							 * Table 13. Watchdog oscillator control register (WDTOSCCTRL, address 0x4004 8024) bit
+								description
+								Bit Symbol Value Description Reset
+								value
+								4:0 DIVSEL Select divider for Fclkana.
+									wdt_osc_clk = Fclkana/ (2 (1 + DIVSEL))
+											00000: 2 (1 + DIVSEL) = 2
+											00001: 2 (1 + DIVSEL) = 4
+									to
+											11111: 2 (1 + DIVSEL) = 64
+									0
+								8:5 FREQSEL Select watchdog oscillator analog output frequency (Fclkana).
+								0x00
+											0x1 0.6 MHz
+											0x2 1.05 MHz
+											0x3 1.4 MHz
+											0x4 1.75 MHz
+											0x5 2.1 MHz
+											0x6 2.4 MHz
+											0x7 2.7 MHz
+											0x8 3.0 MHz
+											0x9 3.25 MHz
+											0xA 3.5 MHz
+											0xB 3.75 MHz
+											0xC 4.0 MHz
+											0xD 4.2 MHz
+											0xE 4.4 MHz
+											0xF 4.6 MHz
+							 */
+
 #define SYSPLLCLKSEL_Val      0x00000001	/* Select PLL Input&0x3:
 												0=Internal RC Osc, usa __IRC_OSC_CLK que eh 12mhz;
 												1=System Osc, usa SystemCoreClock = __SYS_OSC_CLK que eh 12mhz
@@ -139,14 +188,120 @@
 											/* &0x180 -> usa SystemCoreClock o proprio __IRC_OSC_CLK de 12mhz
 											 * ou SystemCoreClock = SYSPLLCTRL multiplicado por (SYSPLLCTRL&0x01F)+1
 											 */
+							// nao faz importancia, pois o SYSPLL esta desligado
+							/*
+							 * Table 10. System PLL control register (SYSPLLCTRL, address 0x4004 8008) bit description
+								Bit Symbol Value Description Reset
+								value
+								4:0 MSEL Feedback divider value. The division value M is the
+								programmed MSEL value + 1.
+								00000: Division ratio M = 1
+								to
+								11111: Division ratio M = 32.
+								0x000
+								6:5 PSEL Post divider ratio P. The division ratio is 2 P. 0x00
+								0x0 P = 1
+								0x1 P = 2
+								0x2 P = 4
+								0x3 P = 8
+							 */
 
 											/*!< Offset: 0x070 Main clock source select (R/W) */
 #define MAINCLKSEL_Val        0x00000003	/* &(0x03) =0 -> Internal RC oscillator
 											   se =1 -> Input Clock to System PLL;	se =2 -> WDT Osc
 											   se =3 -> System PLL Clock Out */
+/*
+ * Table 18. Main clock source select register (MAINCLKSEL, address 0x4004 8070) bit
+	description
+	Bit Symbol Value Description Reset value
+	1:0 SEL Clock source for main clock 0x00
+	0x0 IRC oscillator
+	0x1 Input clock to system PLL
+	0x2 WDT oscillator
+	0x3 System PLL clock out
+ */
+
 
 #define SYSAHBCLKDIV_Val      0x00000001	/*!< Offset: 0x078 System AHB clock divider (R/W) */
+/*
+ * Table 20. System AHB clock divider register (SYSAHBCLKDIV, address 0x4004 8078) bit
+	description
+	Bit Symbol Description Reset value
+	7:0 DIV System AHB clock divider values
+	0: System clock disabled.
+	1: Divide by 1.
+	to
+	255: Divide by 255.
+ */
+
 #define AHBCLKCTRL_Val        0x0001005F
+							/*
+							 * Table 21. System AHB clock control register (SYSAHBCLKCTRL, address 0x4004 8080) bit
+								description
+								Bit Symbol Value Description 							Reset value
+								0 SYS Enables clock for AHB to APB bridge, to the AHB
+										matrix, to the Cortex-M0 FCLK and HCLK, to the
+										SysCon, and to the PMU. This bit is read only.		1
+										0 Reserved
+										1 Enable
+								1 ROM Enables clock for ROM. 								1
+										0 Disable
+										1 Enable
+								2 RAM Enables clock for RAM. 								1
+										0 Disable
+										1 Enable
+								3 FLASHREG Enables clock for flash register interface. 		1
+										0 Disabled
+										1 Enabled
+								4 FLASHARRAY Enables clock for flash array access. 			1
+										0 Disabled
+										1 Enabled
+								5 I2C Enables clock for I2C. 								0
+										0 Disable
+										1 Enable
+								6 GPIO Enables clock for GPIO. 								1
+										0 Disable
+										1 Enable
+								7 CT16B0 Enables clock for 16-bit counter/timer 0.			0
+										0 Disable
+										1 Enable
+								8 CT16B1 Enables clock for 16-bit counter/timer 1. 			0
+										0 Disable
+										1 Enable
+								9 CT32B0 Enables clock for 32-bit counter/timer 0. 			0
+										0 Disable
+										1 Enable
+								10 CT32B1 Enables clock for 32-bit counter/timer 1. 		0
+										0 Disable
+										1 Enable
+								11 SSP0 Enables clock for SPI0. 							1
+										0 Disable
+										1 Enable
+								12 UART Enables clock for UART. See Section 3.1for part
+								specific details.											0
+										0 Disable
+										1 Enable
+								13 ADC Enables clock for ADC. 								0
+										0 Disable
+										1 Enable
+								14 - Reserved 0
+								15 WDT Enables clock for WDT. 								0
+										0 Disable
+										1 Enable
+								16 IOCON Enables clock for I/O configuration block. 		0
+										0 Disable
+										1 Enable
+								17 CAN Enables clock for C_CAN. See Section 3.1for part
+								specific details.
+																							0
+										0 Disable
+										1 Enable
+								18 SSP1 Enables clock for SPI1. 							0
+										0 Disable
+										1 Enable
+							 */
+
+
 #define SSP0CLKDIV_Val        0x00000001	/*!< Offset: 0x094 SSP0 clock divider (R/W) */
 #define UARTCLKDIV_Val        0x00000001	/*!< Offset: 0x098 UART clock divider (R/W) */
 #define SSP1CLKDIV_Val        0x00000001	/*!< Offset: 0x09C SSP1 clock divider (R/W) */
