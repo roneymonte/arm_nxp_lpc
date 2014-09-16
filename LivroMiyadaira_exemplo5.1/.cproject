@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <?fileVersion 4.0.0?>
 
 <cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+=======
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+>>>>>>> 22acf913b58d04e5b2401135ec6496aeb467512f
 	<storageModule moduleId="org.eclipse.cdt.core.settings">
 		<cconfiguration id="com.crt.advproject.config.exe.debug.1469190090">
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.crt.advproject.config.exe.debug.1469190090" moduleId="org.eclipse.cdt.core.settings" name="Debug">
 				<externalSettings/>
 				<extensions>
+<<<<<<< HEAD
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+=======
+>>>>>>> 22acf913b58d04e5b2401135ec6496aeb467512f
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<<<<<<< HEAD
+=======
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+>>>>>>> 22acf913b58d04e5b2401135ec6496aeb467512f
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -52,7 +64,11 @@
 							</tool>
 							<tool id="com.crt.advproject.link.cpp.exe.debug.780991680" name="MCU C++ Linker" superClass="com.crt.advproject.link.cpp.exe.debug"/>
 							<tool id="com.crt.advproject.link.exe.debug.1487293518" name="MCU Linker" superClass="com.crt.advproject.link.exe.debug">
+<<<<<<< HEAD
 								<option id="com.crt.advproject.link.gcc.multicore.master.userobjs.201125128" name="Slave Objects (not visible)" superClass="com.crt.advproject.link.gcc.multicore.master.userobjs"/>
+=======
+								<option id="com.crt.advproject.link.gcc.multicore.master.userobjs.201125128" name="Slave Objects (not visible)" superClass="com.crt.advproject.link.gcc.multicore.master.userobjs" valueType="userObjs"/>
+>>>>>>> 22acf913b58d04e5b2401135ec6496aeb467512f
 								<option id="com.crt.advproject.link.arch.2068068921" name="Architecture" superClass="com.crt.advproject.link.arch" value="com.crt.advproject.link.target.cm3" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.thumb.420072801" name="Thumb mode" superClass="com.crt.advproject.link.thumb" value="true" valueType="boolean"/>
 								<option id="com.crt.advproject.link.script.739471171" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;LivroMiyadaira_exemplo5_1_Debug.ld&quot;" valueType="string"/>
@@ -89,13 +105,21 @@
 			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.crt.advproject.config.exe.release.1178700033" moduleId="org.eclipse.cdt.core.settings" name="Release">
 				<externalSettings/>
 				<extensions>
+<<<<<<< HEAD
 					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
 					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+=======
+>>>>>>> 22acf913b58d04e5b2401135ec6496aeb467512f
 					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
 					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<<<<<<< HEAD
+=======
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GNU_ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+>>>>>>> 22acf913b58d04e5b2401135ec6496aeb467512f
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
@@ -134,7 +158,11 @@
 							</tool>
 							<tool id="com.crt.advproject.link.cpp.exe.release.2132677833" name="MCU C++ Linker" superClass="com.crt.advproject.link.cpp.exe.release"/>
 							<tool id="com.crt.advproject.link.exe.release.1555868639" name="MCU Linker" superClass="com.crt.advproject.link.exe.release">
+<<<<<<< HEAD
 								<option id="com.crt.advproject.link.gcc.multicore.master.userobjs.360406129" name="Slave Objects (not visible)" superClass="com.crt.advproject.link.gcc.multicore.master.userobjs"/>
+=======
+								<option id="com.crt.advproject.link.gcc.multicore.master.userobjs.360406129" name="Slave Objects (not visible)" superClass="com.crt.advproject.link.gcc.multicore.master.userobjs" valueType="userObjs"/>
+>>>>>>> 22acf913b58d04e5b2401135ec6496aeb467512f
 								<option id="com.crt.advproject.link.arch.1613160196" name="Architecture" superClass="com.crt.advproject.link.arch" value="com.crt.advproject.link.target.cm3" valueType="enumerated"/>
 								<option id="com.crt.advproject.link.thumb.892283864" name="Thumb mode" superClass="com.crt.advproject.link.thumb" value="true" valueType="boolean"/>
 								<option id="com.crt.advproject.link.script.472991289" name="Linker script" superClass="com.crt.advproject.link.script" value="&quot;LivroMiyadaira_exemplo5_1_Release.ld&quot;" valueType="string"/>
