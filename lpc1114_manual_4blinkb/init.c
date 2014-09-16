@@ -11,6 +11,7 @@
 void init(void);
 void clock_init();
 void Default_Handler(void);
+extern void SysTick(void);		//Atencao nessa linha alterada Roney
 
 // The following are 'declared' in the linker script
 extern unsigned char  INIT_DATA_VALUES;
@@ -37,7 +38,7 @@ const void * Vectors[] __attribute__((section(".vectors"))) ={
 	0,                   	/* Reserved */
 	0,                   	/* Reserved */
 	Default_Handler,     	/* PendSV */
-	Default_Handler,     	/* SysTick */		
+	SysTick,     	/* SysTick */		// Atencao nessa linha alterada Roney
 /* External interrupt handlers follow */
 	Default_Handler, 	/* PIO0_0 */
 	Default_Handler, 	/* PIO0_1 */
@@ -78,26 +79,26 @@ void clock_init()
 	// The PLL input is the built in 12MHz RC oscillator
 	// This is multiplied up to 48MHz for the main clock
 	// MSEL = 3, PSEL = 1 see page 51 of UM10398 user manual
-	SYSPLLCLKSEL = 0; // select internal RC oscillator
+// SYSPLLCLKSEL = 0; // select internal RC oscillator
 	//      MULTIPLICADOR | DIVISOR	 	...obs:	multiplicador 00000 a 11111 (0+1 a 31+1)
 	//						divisor = 1, 2, 4, 8 (2 bits)
 	//SYSPLLCTRL = (3 << 0) | (1 << 5); // set divisors/multipliers: 3+1 * 12mhz div (2*1) = 24mhz
-	SYSPLLCTRL = (0 << 0) | (4 << 5); // set divisors/multipliers: 0+1 * 12mhz div (2*4) = 12 / 8 mhz = 1.5 mhz
+//SYSPLLCTRL = (0 << 0) | (4 << 5); // set divisors/multipliers: 0+1 * 12mhz div (2*4) = 12 / 8 mhz = 1.5 mhz
 
-	PDRUNCFG &= ~(1<<7); // Power up the SYSPLL_PD PLL.
-	SYSPLLCLKUEN = 1; // inform PLL of update
+//PDRUNCFG &= ~(1<<7); // Power up the SYSPLL_PD PLL.
+//SYSPLLCLKUEN = 1; // inform PLL of update
 	
-	MAINCLKSEL = 3; // Use PLL as main clock
-	MAINCLKUEN = 1; // Inform core of clock update
+//MAINCLKSEL = 3; // Use PLL as main clock
+//MAINCLKUEN = 1; // Inform core of clock update
 
-        CLKOUTCLKSEL=3; // Usa o Main Clock
-        CLKOUTDIV=48;   // divide o clock por 48 vezes
+        CLKOUTCLKSEL=3; // Usa o Main Clock que tem 12 mhz vezes 4 = 48 mhz
+        CLKOUTCLKDIV=48;   // divide o clock por 48 vezes
         CLKOUTUEN=0;
         CLKOUTUEN=1;
         while (!(CLKOUTUEN & 0x01));
 
-        MAINCLKSEL = 3; // Use PLL as main clock
-        MAINCLKUEN = 1; // Inform core of clock update
+//MAINCLKSEL = 3; // Use PLL as main clock
+//MAINCLKUEN = 1; // Inform core of clock update
 
 }
 void init()
