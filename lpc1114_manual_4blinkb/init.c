@@ -90,9 +90,14 @@ void clock_init()
 	
 //MAINCLKSEL = 3; // Use PLL as main clock
 //MAINCLKUEN = 1; // Inform core of clock update
+	SYSAHBCLKDIV=12;		// divisor do System Clock (recebido do IRC, Cristal ou PLL)
+	CLKOUTUEN=0;
+	CLKOUTUEN=1;
 
         CLKOUTCLKSEL=3; // Usa o Main Clock que tem 12 mhz vezes 4 = 48 mhz
-        CLKOUTCLKDIV=48;   // divide o clock por 48 vezes
+        //CLKOUTCLKDIV=48;   // divide o clock por 48 vezes
+        CLKOUTCLKDIV=12;   // divide o clock CLKOUT por 48 vezes
+			   // o Osciloscopio comprovou que no pino 0_1 apresentou 1mhz
         CLKOUTUEN=0;
         CLKOUTUEN=1;
         while (!(CLKOUTUEN & 0x01));

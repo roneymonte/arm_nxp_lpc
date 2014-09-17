@@ -13,43 +13,45 @@ LOAD main.o
 LOAD c:/Users/roney/MentorGraphics/Sourcery_CodeBench_Lite_for_ARM_EABI/lib/gcc/arm-none-eabi/4.8.3/armv6-m\libgcc.a
                 0x00000000                . = ORIGIN (flash)
 
-.text           0x00000000      0x434
+.text           0x00000000      0x42c
  *(.vectors)
  .vectors       0x00000000       0xc0 init.o
                 0x00000000                Vectors
  *(.text)
- .text          0x000000c0       0xb8 init.o
+ .text          0x000000c0       0xd0 init.o
                 0x000000c0                clock_init
-                0x000000f8                init
-                0x00000170                Default_Handler
- .text          0x00000178      0x2bc main.o
-                0x00000178                delay
-                0x00000194                initSysTick
-                0x000001c8                SysTick
-                0x000002e8                Config
-                0x00000358                main
+                0x00000110                init
+                0x00000188                Default_Handler
+ .text          0x00000190      0x29c main.o
+                0x00000190                delay
+                0x000001ac                initSysTick
+                0x000001e0                SysTick
+                0x000002f8                Config
+                0x00000350                main
+                0x000003d0                apagaTodos
+                0x00000400                ligaTodos
 
-.glue_7         0x00000434        0x0
+.glue_7         0x0000042c        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x00000434        0x0
+.glue_7t        0x0000042c        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x00000434        0x0
+.vfp11_veneer   0x0000042c        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x00000434        0x0
+.v4_bx          0x0000042c        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x00000434        0x0
+.iplt           0x0000042c        0x0
  .iplt          0x00000000        0x0 init.o
 
-.rel.dyn        0x00000434        0x0
+.rel.dyn        0x0000042c        0x0
  .rel.iplt      0x00000000        0x0 init.o
                 0x10000000                . = ORIGIN (ram)
 
-.data           0x10000000        0x2 load address 0x00000434
-                0x00000434                INIT_DATA_VALUES = LOADADDR (.data)
+.data           0x10000000        0x2 load address 0x0000042c
+                0x0000042c                INIT_DATA_VALUES = LOADADDR (.data)
                 0x10000000                INIT_DATA_START = .
  *(.data)
  .data          0x10000000        0x0 init.o
@@ -57,23 +59,23 @@ LOAD c:/Users/roney/MentorGraphics/Sourcery_CodeBench_Lite_for_ARM_EABI/lib/gcc/
                 0x10000002                INIT_DATA_END = .
                 0x10000002                BSS_START = .
 
-.igot.plt       0x10000004        0x0 load address 0x00000436
+.igot.plt       0x10000004        0x0 load address 0x0000042e
  .igot.plt      0x00000000        0x0 init.o
 
-.bss            0x10000002        0x0 load address 0x00000436
+.bss            0x10000002        0x0 load address 0x0000042e
  *(.bss)
  .bss           0x10000002        0x0 init.o
  .bss           0x10000002        0x0 main.o
                 0x10000002                BSS_END = .
 OUTPUT(main.elf elf32-littlearm)
 
-.debug_info     0x00000000      0x1d3
+.debug_info     0x00000000      0x1f5
  .debug_info    0x00000000      0x116 init.o
- .debug_info    0x00000116       0xbd main.o
+ .debug_info    0x00000116       0xdf main.o
 
-.debug_abbrev   0x00000000      0x190
+.debug_abbrev   0x00000000      0x1a6
  .debug_abbrev  0x00000000       0xe8 init.o
- .debug_abbrev  0x000000e8       0xa8 main.o
+ .debug_abbrev  0x000000e8       0xbe main.o
 
 .debug_aranges  0x00000000       0x40
  .debug_aranges
@@ -81,15 +83,15 @@ OUTPUT(main.elf elf32-littlearm)
  .debug_aranges
                 0x00000020       0x20 main.o
 
-.debug_line     0x00000000      0x101
- .debug_line    0x00000000       0x63 init.o
- .debug_line    0x00000063       0x9e main.o
+.debug_line     0x00000000      0x107
+ .debug_line    0x00000000       0x66 init.o
+ .debug_line    0x00000066       0xa1 main.o
 
-.debug_str      0x00000000      0x155
+.debug_str      0x00000000      0x16a
  .debug_str     0x00000000      0x122 init.o
                                 0x127 (size before relaxing)
- .debug_str     0x00000122       0x33 main.o
-                                 0xd6 (size before relaxing)
+ .debug_str     0x00000122       0x48 main.o
+                                 0xeb (size before relaxing)
 
 .comment        0x00000000       0x46
  .comment       0x00000000       0x46 init.o
@@ -103,9 +105,9 @@ OUTPUT(main.elf elf32-littlearm)
  .ARM.attributes
                 0x00000031       0x31 main.o
 
-.debug_frame    0x00000000      0x108
+.debug_frame    0x00000000      0x140
  .debug_frame   0x00000000       0x68 init.o
- .debug_frame   0x00000068       0xa0 main.o
+ .debug_frame   0x00000068       0xd8 main.o
 
 Cross Reference Table
 
@@ -120,9 +122,11 @@ INIT_DATA_VALUES                                  init.o
 SysTick                                           main.o
                                                   init.o
 Vectors                                           init.o
+apagaTodos                                        main.o
 clock_init                                        init.o
 delay                                             main.o
 init                                              init.o
 initSysTick                                       main.o
+ligaTodos                                         main.o
 main                                              main.o
                                                   init.o
